@@ -3,7 +3,9 @@ import {
   ScrollView,
   Text,
   TextInput,
+  StyleSheet,
   View,
+  Image,
   Button,
   Alert,
   ActivityIndicator
@@ -11,15 +13,15 @@ import {
 
 import Proxy from '../util/Proxy';
 import Environment from '../../Environment'
-
+const companyLogo = require('../../components/images/company_logo.png');
 export default class Login extends Component {
 
   state = {
     username: 'administrator',
-    password: 'admin123',
+    password: 'Admin@123',
     isLoggingIn: false,
     message: '',
-    server: '10.131.46.196'
+    server: '10.131.78.168'
   }
   _userLogin = () => {
 
@@ -34,7 +36,7 @@ export default class Login extends Component {
 
     var proceed = false;
     Environment.CLIENT_API = `http://${params.server}/rest/`;
-    Environment.AUTH = 'Basic ' + btoa(`${params.username}:${params.password}`);
+    Environment.AUTH = 'Basic ' + Base64.btoa(`${params.username}:${params.password}`);
     var uri = Environment.CLIENT_API+'version-info';
 
     var prox = new Proxy();
@@ -86,11 +88,10 @@ export default class Login extends Component {
 
   render() {
     return (
-      <ScrollView style={{ padding: 20 }}>
-        <Text
-          style={{ fontSize: 27 }}>
-          Login
-				</Text>
+      <ScrollView style={{ padding: 40 }}>
+        <View style={styles.loginContainer}>
+                <Image source={companyLogo} style={styles.logo} resizeMode="contain" />
+              </View>	
         <TextInput
           ref={component => this._server = component}
           placeholder='Server'
@@ -130,3 +131,16 @@ export default class Login extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+     loginContainer:{
+        alignItems: 'center',
+        flexGrow: 1,
+        justifyContent: 'center'
+    },
+    logo: {
+       // position: 'absolute',
+        width: 325,
+        height: 80
+    }
+ });

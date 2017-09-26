@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "Base64": "^1.0.1",
     "art": "^0.10.1",
+    "base-64": "^0.1.0",
     "child_process": "^1.0.2",
     "d3": "^4.10.2",
     "d3-shape": "^1.2.0",
